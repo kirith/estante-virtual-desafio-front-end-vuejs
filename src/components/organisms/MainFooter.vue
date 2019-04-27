@@ -1,0 +1,13 @@
+<template>
+  <footer class="bg-light">
+    <div class="container">
+      <p class="text-center">Aplicativo criado por <a href="https://github.com/kirith">Luís Victor Oliveira (Kirith@github)</a></p>
+    </div>
+  </footer>
+</template>
+
+<script>
+  export default {
+    name: 'main-footer'
+  }
+</script>

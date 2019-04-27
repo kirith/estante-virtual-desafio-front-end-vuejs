@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    <header>
-      <span>Vue.js PWA</span>
-    </header>
+    <main-header />
     <main>
-      <address-list :enderecos="enderecos"/>
+      <div class="container">
+        <address-list :enderecos="enderecos"/>
+      </div>
     </main>
+    <main-footer />
   </div>
 </template>
 
 <script>
-
+import MainHeader from '@/components/organisms/MainHeader.vue'
+import MainFooter from '@/components/organisms/MainFooter.vue'
 import AddressList from '@/components/organisms/AddressList.vue'
 
 export default {
@@ -38,14 +40,20 @@ export default {
     }
   },
   components: {
-    AddressList
+    AddressList,
+    MainHeader,
+    MainFooter
   }
 }
 </script>
 
 <style>
+html{
+  height: 100%;
+}
 body {
   margin: 0;
+  height: 100%;
 }
 
 #app {
@@ -53,6 +61,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  height: 100%;
 }
 
 main {

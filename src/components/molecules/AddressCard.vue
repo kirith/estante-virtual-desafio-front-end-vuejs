@@ -1,5 +1,5 @@
 <template>
-  <div class="text-left p-3">
+  <div class="card text-left p-3">
     <b-col>
       <b-row>
         <span class="endereco">{{endereco.endereco}}</span>,

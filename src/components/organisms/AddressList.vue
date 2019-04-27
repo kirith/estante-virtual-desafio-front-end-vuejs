@@ -1,13 +1,21 @@
 <template>
-  <ul>
-    <li v-for="endereco in enderecosFiltrados">
-      <address-card class="item-endereco" :endereco ="endereco" />
-    </li>
-  </ul>
+  <div>
+    <search-bar 
+      legenda="Filtro" 
+      @busca="atualizarBusca"
+    />
+    <ul class="list-unstyled">
+      <li v-for="endereco in enderecosFiltrados">
+        <address-card class="item-endereco" :endereco ="endereco" />
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
   import AddressCard from '@/components/molecules/AddressCard'
+  import SearchBar from '@/components/molecules/SearchBar'
+  import containsSubstringInProperties from '@/functions/containsSubstringInProperties'
 
   export default {
     name: 'address-list',
@@ -22,10 +30,15 @@
     computed: {
       enderecosFiltrados () {
         return this.enderecos.filter(endereco => {
-          return this.busca ? Object.values(endereco).includes(this.busca) : true
+          return this.busca ? containsSubstringInProperties(endereco, this.busca) : true
         })
       }
     },
-    components: {AddressCard}
+    methods: {
+      atualizarBusca (busca) {
+        this.busca = busca
+      }
+    },
+    components: {SearchBar, AddressCard}
   }
 </script>
