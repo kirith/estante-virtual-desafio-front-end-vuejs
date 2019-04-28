@@ -2,7 +2,7 @@
   <div class="card text-left p-3">
     <b-col>
       <b-row>
-        <span class="endereco">{{endereco.endereco}}</span>,
+        <span class="logradouro">{{endereco.logradouro}}</span>,
         <span class="numero">{{endereco.numero}}</span> -
         <span class="complemento">{{endereco.complemento}}</span> -
         <span class="bairro">{{endereco.bairro}}</span>
@@ -13,6 +13,7 @@
         <span class="cep">{{cepFormatado}}</span>
       </b-row>
     </b-col>
+    <slot name="enderecoOpcoes" />
   </div>
 </template>
 

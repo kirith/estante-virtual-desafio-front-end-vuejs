@@ -1,10 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" class="d-flex flex-column">
     <main-header />
-    <main>
-      <div class="container">
-        <address-list :enderecos="enderecos"/>
-      </div>
+    <main class="flex-fill">
+      <router-view />
     </main>
     <main-footer />
   </div>
@@ -13,34 +11,10 @@
 <script>
 import MainHeader from '@/components/organisms/MainHeader.vue'
 import MainFooter from '@/components/organisms/MainFooter.vue'
-import AddressList from '@/components/organisms/AddressList.vue'
 
 export default {
   name: 'app',
-  data: function () {
-    return {
-      enderecos: [{
-        cep: '21863090',
-        endereco: 'Rua Luzia de Macedo Dantas',
-        numero: '208',
-        bairro: 'Bangu',
-        complemento: 'Casa 101',
-        cidade: 'Rio de Janeiro',
-        uf: 'RJ'
-      },
-      {
-        cep: '21863090',
-        endereco: 'Rua Luzia de Dantas',
-        numero: '208',
-        bairro: 'Bangu',
-        complemento: 'Casa 101',
-        cidade: 'Rio de Janeiro',
-        uf: 'SP'
-      }]
-    }
-  },
   components: {
-    AddressList,
     MainHeader,
     MainFooter
   }

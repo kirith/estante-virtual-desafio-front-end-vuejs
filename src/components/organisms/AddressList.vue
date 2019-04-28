@@ -6,7 +6,12 @@
     />
     <ul class="list-unstyled">
       <li v-for="endereco in enderecosFiltrados">
-        <address-card class="item-endereco" :endereco ="endereco" />
+        <address-card class="item-endereco" :endereco ="endereco">
+            <template v-slot:enderecoOpcoes>
+              <slot name="enderecoOpcoes"/>
+            </template>
+          </slot>
+        </address-card>
       </li>
     </ul>
   </div>
