@@ -40,7 +40,7 @@
           </template>
             Endereço
         </b-btn>
-        <b-btn v-if="id !== null" class="bg-danger" @click="formNew">
+        <b-btn class="bg-danger" @click="formNew">
           Cancelar
         </b-btn>
       </div>
