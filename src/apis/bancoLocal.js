@@ -48,7 +48,7 @@ class BancoLocal {
    */
   deleteAddress (id) {
     let enderecos = [...this.getAddresses()]
-    enderecos = enderecos.splice(id, 1)
+    enderecos.splice(id, 1)
     this.setLocal(enderecos)
   }
 
