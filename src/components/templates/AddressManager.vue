@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <address-form @submitted="saveAddress" :editando="editando"/>
+    <address-form @submitted="saveAddress" :editando="editando" :editandoId="editandoIndex"/>
     <address-list :enderecos="enderecos">
       <template v-slot:enderecoOpcoes="{id}">
-          <b-button-group>
+          <div class="py-2">
             <b-button @click="editAddress(id)"><i class="fa fa-edit"></i></b-button>
             <b-button class="bg-danger" @click="deleteAddress(id)"><i class="fa fa-trash"></i></b-button>
-          </b-button-group>
+          </div>
       </template>
     </address-list>
   </div>
@@ -41,8 +41,9 @@
         this.editando = {...this.enderecos[id]}
         this.editandoIndex = id
       },
-      async saveAddress (endereco) {
-        bancoLocal.updateAddress(endereco, this.editandoIndex)
+      async saveAddress ({endereco, id}) {
+        console.log('save', endereco, id)
+        bancoLocal.updateAddress(endereco, id)
         this.editando = {} // reset form
         this.editandoIndex = null
         this.refreshAddresses()

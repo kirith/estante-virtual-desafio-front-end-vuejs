@@ -3,14 +3,18 @@
     <b-col>
       <b-row>
         <span class="logradouro">{{endereco.logradouro}}</span>,
-        <span class="numero">{{endereco.numero}}</span> -
-        <span class="complemento">{{endereco.complemento}}</span> -
+        <span class="numero pl-1">{{endereco.numero}}</span>
+        <dash-separator />
+        <span v-if="endereco.complemento" class="complemento">{{endereco.complemento}}</span>
+        <dash-separator v-if="endereco.complemento" />
         <span class="bairro">{{endereco.bairro}}</span>
       </b-row>
       <b-row>
-        <span class="cidade">{{endereco.cidade}}</span> -
+        <span class="cidade">{{endereco.localidade}}</span>
+        <dash-separator />
         <span class="uf">{{endereco.uf}}</span>
-        <span class="cep">{{cepFormatado}}</span>
+        <dash-separator />
+        <span class="cep">{{endereco.cep}}</span>
       </b-row>
     </b-col>
     <slot name="enderecoOpcoes" :id="id" />
@@ -18,6 +22,8 @@
 </template>
 
 <script>
+  import DashSeparator from '@/components/atoms/DashSeparator'
+
   export default {
     name: 'address-card',
     props: {
@@ -26,10 +32,6 @@
         type: Number
       }
     },
-    computed: {
-      cepFormatado: function () {
-        return [this.endereco.cep.slice(0, 5), '-', this.endereco.cep.slice(5)].join('')
-      }
-    }
+    components: {DashSeparator}
   }
 </script>
