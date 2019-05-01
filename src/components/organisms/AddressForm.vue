@@ -9,7 +9,9 @@
             v-mask="'#####-###'"
             placeholder="00000-000"
             @change="buscarEndereco"
+            :state="cepValido"
             required
+            @keydown.enter.prevent="buscarEndereco"
           />
           <b-input-group-append class="py-2 px-3 align-items-center">
             <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCep.cfm" target="_blank">Não sei meu CEP</a>
@@ -57,7 +59,8 @@
     data: function () {
       return {
         endereco: this.editando,
-        id: this.editandoId
+        id: this.editandoId,
+        cepValido: null
       }
     },
     props: {
@@ -83,19 +86,25 @@
     },
     methods: {
       buscarEndereco: function () {
+        if (this.cep.length < 8) return
         enderecoViaCep(this.cep).then(({data}) => {
-          this.endereco = {...this.endereco, ...data}
+          if (data.erro) {
+            this.cepValido = false
+            this.endereco = {}
+          } else {
+            this.cepValido = true
+            this.endereco = {...this.endereco, ...data}
+          }
         })
-      },
-      formReset () {
-        this.endereco = {}
       },
       formNew () {
         this.id = null
-        this.formReset()
+        this.endereco = {}
+        this.cepValido = null
       },
       submit () {
         this.$emit('submitted', {endereco: this.endereco, id: this.id})
+        this.formNew()
       }
     },
     directives: {
