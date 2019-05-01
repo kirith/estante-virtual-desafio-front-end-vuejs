@@ -13,7 +13,7 @@
         <span class="cep">{{cepFormatado}}</span>
       </b-row>
     </b-col>
-    <slot name="enderecoOpcoes" />
+    <slot name="enderecoOpcoes" :id="id" />
   </div>
 </template>
 
@@ -21,7 +21,10 @@
   export default {
     name: 'address-card',
     props: {
-      endereco: {}
+      endereco: {},
+      id: {
+        type: Number
+      }
     },
     computed: {
       cepFormatado: function () {

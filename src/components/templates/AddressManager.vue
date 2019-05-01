@@ -2,11 +2,11 @@
   <div class="container">
     <address-form @submitted="saveAddress" :editando="editando"/>
     <address-list :enderecos="enderecos">
-      <template v-slot:enderecoOpcoes>
-        <b-button-group>
-          <b-button @click="editPost(1)"><i class="fa fa-edit"></i></b-button>
-          <b-button class="bg-danger" @click="deletePost(0)"><i class="fa fa-trash"></i></b-button>
-        </b-button-group>
+      <template v-slot:enderecoOpcoes="{id}">
+          <b-button-group>
+            <b-button @click="editAddress(id)"><i class="fa fa-edit"></i></b-button>
+            <b-button class="bg-danger" @click="deleteAddress(id)"><i class="fa fa-trash"></i></b-button>
+          </b-button-group>
       </template>
     </address-list>
   </div>
@@ -37,22 +37,21 @@
         this.enderecos = bancoLocal.getAddresses()
         this.carregando = false
       },
-      async editPost (id, endereco) {
-        this.editando = {...endereco}
+      async editAddress (id) {
+        this.editando = {...this.enderecos[id]}
         this.editandoIndex = id
       },
       async saveAddress (endereco) {
-        console.log('save', endereco)
         bancoLocal.updateAddress(endereco, this.editandoIndex)
         this.editando = {} // reset form
         this.editandoIndex = null
         this.refreshAddresses()
       },
-      async deletePost (id) {
-        if (confirm('Are you sure you want to delete this post?')) {
-          // if we are editing a post we deleted, remove it from the form
+      async deleteAddress (id) {
+        if (confirm('Confirmar a exclusão do endereço?')) {
           if (this.editandoIndex === id) {
             this.editando = {}
+            this.editandoIndex = null
           }
           bancoLocal.deleteAddress(id)
           this.refreshAddresses()

@@ -19,6 +19,8 @@
         <b-input-group prepend="Número*" class="col-md-3 col-lg-3 col-xl-3">
           <b-form-input
             type="number"
+            min="1"
+            placeholder="0"
             v-model="endereco.numero"
           />
         </b-input-group>
@@ -49,6 +51,11 @@
         cep: '',
         numero: '',
         complemento: ''
+      }
+    },
+    watch: {
+      editando: function (endereco) {
+        this.endereco = endereco
       }
     },
     computed: {
