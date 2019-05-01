@@ -1,5 +1,5 @@
 <template>
-  <b-card :title="(id !== null ? 'Editar Endereço' : 'Novo Endereço')">
+  <b-card :title="(endereco.id ? 'Editar Endereço' + endereco.id : 'Novo Endereço')">
     <form @submit.prevent="submit">
       <b-row class="py-2" >
         <b-input-group prepend="CEP*" class="col-12 justify-content-center">
@@ -31,18 +31,7 @@
         </b-input-group>
       </b-row>
       <div class="py-2" v-if="endereco.uf">
-        <b-btn type="submit" variant="success">
-          <template v-if="id !== null">
-            Atualizar
-          </template>
-          <template v-else>
-            Salvar
-          </template>
-            Endereço
-        </b-btn>
-        <b-btn v-if="id !== null" class="bg-danger" @click="formNew">
-          Cancelar
-        </b-btn>
+        <b-btn type="submit" variant="success">Salvar Endereço</b-btn>
       </div>
     </form>
   </b-card>
@@ -56,8 +45,7 @@
     name: 'address-form',
     data: function () {
       return {
-        endereco: this.editando,
-        id: this.editandoId
+        endereco: this.editando
       }
     },
     props: {
@@ -65,15 +53,11 @@
         cep: '',
         numero: '',
         complemento: ''
-      },
-      editandoId: null
+      }
     },
     watch: {
-      editando (endereco) {
+      editando: function (endereco) {
         this.endereco = endereco
-      },
-      editandoId (id) {
-        this.id = id
       }
     },
     computed: {
@@ -87,15 +71,8 @@
           this.endereco = {...this.endereco, ...data}
         })
       },
-      formReset () {
-        this.endereco = {}
-      },
-      formNew () {
-        this.id = null
-        this.formReset()
-      },
       submit () {
-        this.$emit('submitted', {endereco: this.endereco, id: this.id})
+        this.$emit('submitted', this.endereco)
       }
     },
     directives: {
