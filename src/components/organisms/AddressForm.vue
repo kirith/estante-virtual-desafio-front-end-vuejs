@@ -1,34 +1,36 @@
 <template>
   <b-card :title="(endereco.id ? 'Editar Endereço' + endereco.id : 'Novo Endereço')">
     <form @submit.prevent="submit">
-      <b-row>
-        <b-input-group prepend="CEP*" class="col-12">
+      <b-row class="py-2" >
+        <b-input-group prepend="CEP*" class="col-12 justify-content-center">
           <b-form-input 
             type="text"
             v-model="endereco.cep"
             v-mask="'#####-###'"
             placeholder="00000-000"
             @change="buscarEndereco"
+            required
           />
-          <b-input-group-append>
+          <b-input-group-append class="py-2 px-3 align-items-center">
             <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCep.cfm" target="_blank">Não sei meu CEP</a>
           </b-input-group-append>
         </b-input-group>
       </b-row>
-      <b-row v-if="endereco.uf">
+      <b-row class="py-2" v-if="endereco.uf">
         <b-input-group prepend="Número*" class="col-md-3 col-lg-3 col-xl-3">
           <b-form-input
             type="number"
             min="1"
             placeholder="0"
             v-model="endereco.numero"
+            required
           />
         </b-input-group>
         <b-input-group prepend="Complemento" class="col-md-7 col-lg-7 col-xl-7">
           <b-form-input type="text" v-model="endereco.complemento"/>
         </b-input-group>
       </b-row>
-      <div>
+      <div class="py-2" v-if="endereco.uf">
         <b-btn type="submit" variant="success">Salvar Endereço</b-btn>
       </div>
     </form>

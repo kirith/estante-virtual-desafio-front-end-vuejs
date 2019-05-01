@@ -29,7 +29,7 @@ class BancoLocal {
    */
   getAddresses () {
     const enderecos = JSON.parse(localStorage.getItem(this.__localStorageName__))
-    return enderecos
+    return [...enderecos]
   }
 
   /**
@@ -37,7 +37,7 @@ class BancoLocal {
    * @param {Object} endereco Endereço a ser salvo
    */
   saveAddress (endereco) {
-    let enderecos = [...this.getAddresses()]
+    let enderecos = this.getAddresses()
     enderecos.push(endereco)
     this.setLocal(enderecos)
   }
@@ -47,7 +47,7 @@ class BancoLocal {
    * @param {Integer} id Index do endereço no array
    */
   deleteAddress (id) {
-    let enderecos = [...this.getAddresses()]
+    let enderecos = this.getAddresses()
     enderecos.splice(id, 1)
     this.setLocal(enderecos)
   }
@@ -59,7 +59,13 @@ class BancoLocal {
    * @param {Object} endereco Valores a serem atualizados no endereço
    */
   updateAddress (endereco, id = null) {
-    if (id == null) this.saveAddress(endereco)
+    if (id == null) {
+      this.saveAddress(endereco)
+    } else {
+      let enderecos = this.getAddresses()
+      enderecos[id] = endereco
+      this.setLocal(enderecos)
+    }
   }
 }
 
