@@ -16,6 +16,9 @@
         <dash-separator />
         <span class="cep">{{endereco.cep}}</span>
       </b-row>
+      <b-row v-if="distancia">
+        <small class="text-secondary">Distância: <span class="distancia">{{distancia}}</span> KM</small>
+      </b-row>
     </b-col>
     <slot name="enderecoOpcoes" :id="id" />
   </div>
@@ -23,6 +26,7 @@
 
 <script>
   import DashSeparator from '@/components/atoms/DashSeparator'
+  import localizador from '@/apis/localizador'
 
   export default {
     name: 'address-card',
@@ -30,6 +34,13 @@
       endereco: {},
       id: {
         type: Number
+      }
+    },
+    asyncComputed: {
+      async distancia () {
+        const userPosition = await localizador.getUserPosition()
+        const distance = await localizador.distance(this.endereco, userPosition)
+        return distance.toFixed(2)
       }
     },
     components: {DashSeparator}

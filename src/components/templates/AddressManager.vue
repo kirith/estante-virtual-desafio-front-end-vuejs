@@ -13,11 +13,12 @@
 </template>
 
 <script>
-  import bancoLocal from '@/apis/bancoLocal.js'
+  import bancoLocal from '@/apis/bancoLocal'
+  import localizador from '@/apis/localizador'
 
   import AddressList from '@/components/organisms/AddressList'
   import AddressForm from '@/components/organisms/AddressForm'
-
+  
   export default {
     name: 'address-manager',
     data () {
@@ -42,7 +43,19 @@
         this.editandoIndex = id
       },
       async saveAddress ({endereco, id}) {
-        console.log('save', endereco, id)
+        const coordenadas = await localizador.search({
+          postalcode: endereco.cep.replace('-', ''),
+          street: endereco.logradouro,
+          city: endereco.localidade,
+          state: endereco.uf,
+          country: 'BR'
+        })
+
+        endereco = {
+          ...endereco,
+          latitude: coordenadas.lat,
+          longitude: coordenadas.lon
+        }
         bancoLocal.updateAddress(endereco, id)
         this.editando = {} // reset form
         this.editandoIndex = null
