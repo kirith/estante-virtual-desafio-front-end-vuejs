@@ -9,6 +9,7 @@ import AsyncComputed from 'vue-async-computed'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'font-awesome/scss/font-awesome.scss'
+import 'weather-icons/css/weather-icons.min.css'
 
 Vue.use(BootstrapVue)
 Vue.use(AsyncComputed)
