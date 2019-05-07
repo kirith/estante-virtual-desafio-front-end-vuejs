@@ -22,14 +22,12 @@ class Clima {
 
   async climaEndereco (latitude, longitude, data) {
     let search = await this.search(latitude, longitude)
-    console.log('search', search)
     let clima = await this.clima(search.woeid, data)
     return clima
   }
 
   async climaEnderecoAgora (latitude, longitude) {
     const data = moment().format('YYYY/MM/DD')
-    // const dataFormatada = `${data.getFullYear()}/${data.getMonth()}/${data.getDate()}`
     let clima = await this.climaEndereco(latitude, longitude, data)
     return clima
   }

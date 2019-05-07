@@ -52,15 +52,18 @@
         type: Number
       }
     },
+    computed: {
+      distancia () {
+        return this.userPosition ? localizador.distance(this.endereco, this.userPosition).toFixed(2) : false
+      }
+    },
     asyncComputed: {
-      async distancia () {
+      async userPosition () {
         const userPosition = await localizador.getUserPosition()
-        const distance = await localizador.distance(this.endereco, userPosition)
-        return distance.toFixed(2)
+        return userPosition
       },
       async clima () {
         const clima = await tempo.climaEnderecoAgora(this.endereco.latitude, this.endereco.longitude)
-        console.log('clima', clima)
         return clima
       }
     },
