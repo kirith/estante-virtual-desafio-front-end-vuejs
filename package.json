@@ -21,10 +21,12 @@
     "font-awesome": "^4.7.0",
     "great-circle-distance": "^1.0.2",
     "karma-chrome-launcher": "^2.2.0",
+    "moment": "^2.24.0",
     "vue": "^2.5.2",
     "vue-async-computed": "^3.6.1",
     "vue-router": "^3.0.1",
-    "vue-the-mask": "^0.11.1"
+    "vue-the-mask": "^0.11.1",
+    "weather-icons": "^1.3.2"
   },
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.29",

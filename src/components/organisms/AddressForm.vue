@@ -1,10 +1,11 @@
 <template>
-  <b-card :title="(id !== null ? 'Editar Endereço' : 'Novo Endereço')">
+  <b-card class="my-4" :title="(id !== null ? 'Editar Endereço' : 'Novo Endereço')">
     <form @submit.prevent="submit">
       <b-row class="py-2" >
         <b-input-group prepend="CEP*" class="col-12 justify-content-center">
           <b-form-input 
             type="text"
+            class="h-100"
             v-model="endereco.cep"
             v-mask="'#####-###'"
             placeholder="00000-000"
