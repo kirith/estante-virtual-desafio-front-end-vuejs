@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="my-4">
     <search-bar 
       legenda="Filtro" 
+      class="my-3"
       @busca="atualizarBusca"
     />
     <ul class="list-unstyled">

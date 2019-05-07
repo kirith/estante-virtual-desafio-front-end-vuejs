@@ -5,7 +5,7 @@
         <b-col v-if="clima" class="col-md-2 justify-content-md-end">
           <weather-card :estado="clima[0].weather_state_abbr" :temperatura="clima[0].the_temp.toFixed(1)"/>
         </b-col>
-        <b-col class="col-sm-10">
+        <b-col :class="`${clima ? 'col-sm-10' : ''}`">
           <b-row>
             <span class="logradouro">{{endereco.logradouro}}</span>,
             <span class="numero pl-1">{{endereco.numero}}</span>
