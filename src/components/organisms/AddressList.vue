@@ -6,7 +6,7 @@
       @busca="atualizarBusca"
     />
     <ul class="list-unstyled">
-      <li v-for="(endereco, index) in enderecosFiltrados">
+      <li v-for="(endereco, index) in enderecosFiltrados" :key="index">
         <address-card class="item-endereco" :endereco ="endereco">
             <template v-slot:enderecoOpcoes>
               <slot name="enderecoOpcoes" :id="index" />
