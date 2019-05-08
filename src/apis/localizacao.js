@@ -25,6 +25,7 @@ class Localizacao {
 
   async search (parametros) {
     const _this = this
+
     let res = await get(this.searchUrl, {
       params: {
         key: _this.token,

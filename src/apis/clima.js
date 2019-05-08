@@ -2,8 +2,8 @@ import { get } from 'axios'
 import moment from 'moment'
 
 class Clima {
-  constructor ({prefixoUrl = ''}) {
-    this.urlBaseAPI = prefixoUrl + 'https://www.metaweather.com/api/location'
+  constructor (options = {prefixoUrl: ''}) {
+    this.urlBaseAPI = options.prefixoUrl + 'https://www.metaweather.com/api/location'
   }
 
   async search (latitude, longitude) {
