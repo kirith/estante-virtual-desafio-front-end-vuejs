@@ -1,5 +1,5 @@
 import { get } from 'axios'
-import { greatCircleDistance } from 'great-circle-distance'
+import greatCircleDistance from 'haversine-js'
 
 class Localizacao {
   searchUrl = 'https://us1.locationiq.com/v1/search.php'
@@ -10,14 +10,7 @@ class Localizacao {
   }
 
   distance (endereco1, endereco2) {
-    const coords = {
-      lat1: endereco1.latitude,
-      lng1: endereco1.longitude,
-      lat2: endereco2.latitude,
-      lng2: endereco2.longitude
-    }
-
-    return greatCircleDistance(coords)
+    return greatCircleDistance(endereco1, endereco2).toFixed(2)
   }
 
   getUserPosition (options) {

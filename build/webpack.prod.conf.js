@@ -40,6 +40,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       compress: {
         warnings: false
       },
+      ecma: 8,
       sourceMap: true
     }),
     // extract css into its own file

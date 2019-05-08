@@ -54,7 +54,7 @@
     },
     computed: {
       distancia () {
-        return this.userPosition ? localizador.distance(this.endereco, this.userPosition).toFixed(2) : false
+        return this.userPosition ? localizador.distance(this.endereco, this.userPosition) : false
       }
     },
     asyncComputed: {
